@@ -20,7 +20,7 @@ export class AuthController {
     @Get('/42login')
     @UseGuards(FortytwoAuthGuard)
     async login() {
-        console.log('42 login called')
+        console.log'42 login called')
         return 'success';
     }
 
