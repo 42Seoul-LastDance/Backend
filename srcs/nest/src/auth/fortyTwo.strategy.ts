@@ -28,7 +28,7 @@ export class FortytwoStrategy extends PassportStrategy(Strategy, 'fortytwo') {
     //PassportStrategy 의 전략을 초기화하고 설정.
     constructor(private authService: AuthService) {
         super({
-            authorizationURL: `https://api.intra.42.fr/oauth/authorize?client_id=${process.env.FT_CLIENT_ID}&redirect_uri=${process.env.T_CALLBACK}&response_type=code`,
+            authorizationURL: `https://api.intra.42.fr/oauth/authorize?client_id=${process.env.FT_CLIENT_ID}&redirect_uri=${process.env.FT_CALLBACK}&response_type=code`,
             tokenURL: 'https://api.intra.42.fr/oauth/token',
             clientID: process.env.FT_CLIENT_ID,
             clientSecret: process.env.FT_CLIENT_SECRET,

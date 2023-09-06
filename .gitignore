@@ -35,3 +35,6 @@ srcs/postgresql/*
 !.vscode/launch.json
 !.vscode/extensions.json
 .vscode/*
+
+# environment varaibles
+.env
