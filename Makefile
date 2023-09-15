@@ -4,7 +4,17 @@ all		: $(NAME)
 
 $(NAME) :
 	mkdir -p ./srcs/postgresql
-	docker-compose up --build
+	@if docker info | grep -q "ERROR"; then \
+		echo "\033[0;96m--- Docker will be running soon ---"; \
+		echo "y" | ./utils/init_docker.sh; \
+		while docker info | grep -q "ERROR"; do \
+			sleep 1; \
+		done >/dev/null 2>&1; \
+		docker-compose up --build; \
+	else \
+		echo "\033[0;96m--- Docker is already running ---"; \
+		docker-compose up --build; \
+	fi
 
 down	: 
 	docker-compose down
@@ -12,11 +22,11 @@ down	:
 
 clean	:
 	make down
-	docker system prune -af
+	@docker system prune -af
 
 fclean	:
 	make clean
-	docker volume rm $$(docker volume ls -q -f dangling=true) || docker volume ls
+	@docker volume rm $$(docker volume ls -q -f dangling=true) || docker volume ls
 
 re		:
 	make fclean
@@ -31,8 +41,7 @@ stest	:
 xtest	:
 	docker exec next curl http://localhost:4242
 
-next	:
-	docker exec -it next npx create-next-app srcs/my-app
-	docker exec next npm --prefix srcs/my-app run dev
+exec	:
+	docker exec -it react /bin/bash
 
 .PHONY	: all down clean fclean docker cntest stest xtest next
