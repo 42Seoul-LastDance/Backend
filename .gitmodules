@@ -1,0 +1,6 @@
+[submodule "lib"]
+	path = lib
+	url = git@github.com:42Seoul-LastDance/env.git
+[submodule "envlib"]
+	path = envlib
+	url = git@github.com:42Seoul-LastDance/env.git
